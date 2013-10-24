@@ -5,17 +5,19 @@ public class Rectangle {
 
 	private int width;
 	private int height;
+	private Point topLeft;
 	private Color color;
 
-	public Rectangle(int width, int height, Color color) {
+	public Rectangle(int width, int height, Point topLeft, Color color) {
 		this.width = width;
 		this.height = height;
+		this.topLeft = topLeft;
 		this.color = color;
 	}
 
-	public void draw(Graphics g, int yLoc) {
+	public void draw(Graphics g) {
 		g.setColor(color);
-		g.fillRect(0, yLoc, this.width, this.height);
+		g.fillRect(this.topLeft.getX(), this.topLeft.getY(), this.width, this.height);
 	}
 
 	public int getHeight() {

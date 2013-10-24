@@ -6,7 +6,7 @@ public class Flag extends Applet {
 	private AmericanFlag flag;
 
 	public void init() {
-		flag = new AmericanFlag(1425, 750, 1.0);
+		flag = new AmericanFlag(1900, 1000, 0.75);
 	}
 
 	public void paint(Graphics g) {
