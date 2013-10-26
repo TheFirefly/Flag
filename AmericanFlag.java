@@ -21,7 +21,7 @@ public class AmericanFlag {
 		this.width = width * scale;
 		this.height = height * scale;
 		this.stripes = new Rectangle[13];
-		this.stars = new Stars[50];
+		this.stars = new Star[50];
 
 		int uWidth = (int)(this.unionWidthRatio * this.height);
 		int uHeight = ((int)(this.stripeHeightRatio * this.height)) * 7;
@@ -40,6 +40,33 @@ public class AmericanFlag {
 
 			yOffset += stripeHeight;
 		}
+
+		double offsetRatio = this.height * 0.063;
+		double xStarOffset = offsetRatio;
+		double yStarOffset = this.union.getHeight() / 10.0;
+		double diameter = this.height * 0.0616;
+		int maxStars = 6;
+		int rowCount = 0;
+		for (int i = 0 ; i < this.stars.length ; i++) {
+			if (rowCount < maxStars) {
+				this.stars[i] = new Star(diameter, new Point((int)xStarOffset, (int)yStarOffset), Color.WHITE);
+				rowCount++;
+				xStarOffset += (2.0 * (offsetRatio));
+			} else {
+				if (maxStars == 6) {
+					xStarOffset = 2.0 * offsetRatio;
+					maxStars = 5;
+				} else {
+					xStarOffset = offsetRatio;
+					maxStars = 6;
+				}
+				yStarOffset += this.union.getHeight() / 10.0;
+				rowCount = 1;
+
+				this.stars[i] = new Star(diameter, new Point((int)xStarOffset, (int)yStarOffset), Color.WHITE);
+				xStarOffset += (2.0 * (offsetRatio));
+			}
+		}
 	}
 
 
@@ -48,6 +75,10 @@ public class AmericanFlag {
 			this.stripes[i].draw(g);
 		}
 		this.union.draw(g);
+
+		for (int i = 0 ; i < 50 ; i++) {
+			this.stars[i].draw(g);
+		}
 	}
 
 }
